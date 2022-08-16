@@ -28,17 +28,6 @@ namespace Sat.Recruitment.Api.Controllers
         [Route("/create-user")]
         public async Task<Result> CreateUser(string name, string email, string address, string phone, string userType, string money)
         {
-            var errors = "";
-
-            ValidateErrors(name, email, address, phone, ref errors);
-
-            if (errors != null && errors != "")
-                return new Result()
-                {
-                    IsSuccess = false,
-                    Errors = errors
-                };
-
             var newUser = new User
             {
                 Name = name,
@@ -49,54 +38,102 @@ namespace Sat.Recruitment.Api.Controllers
                 Money = decimal.Parse(money)
             };
 
-            if (newUser.UserType == "Normal")
+            var errors = "";
+
+            ValidateErrors(newUser, ref errors);
+
+            if (string.IsNullOrEmpty(errors))
+                return new Result()
+                {
+                    IsSuccess = false,
+                    Errors = errors
+                };
+
+
+            switch (newUser.UserType)
             {
-                if (decimal.Parse(money) > 100)
-                {
-                    var percentage = Convert.ToDecimal(0.12);
-                    //If new user is normal and has more than USD100
-                    var gif = decimal.Parse(money) * percentage;
-                    newUser.Money = newUser.Money + gif;
-                }
-                if (decimal.Parse(money) < 100)
-                {
-                    if (decimal.Parse(money) > 10)
+                case "Normal":
+                    if (newUser.Money > 100)
+                    {
+                        var percentage = Convert.ToDecimal(0.12);
+                        //If new user is normal and has more than USD100
+                        var gift = newUser.Money * percentage;
+                        newUser.Money = newUser.Money + gift;
+                    }
+                    else if (newUser.Money < 100 && newUser.Money >10)
                     {
                         var percentage = Convert.ToDecimal(0.8);
-                        var gif = decimal.Parse(money) * percentage;
-                        newUser.Money = newUser.Money + gif;
+                        var gift = newUser.Money * percentage;
+                        newUser.Money = newUser.Money + gift;
                     }
-                }
-            }
-            if (newUser.UserType == "SuperUser")
-            {
-                if (decimal.Parse(money) > 100)
-                {
-                    var percentage = Convert.ToDecimal(0.20);
-                    var gif = decimal.Parse(money) * percentage;
-                    newUser.Money = newUser.Money + gif;
-                }
-            }
-            if (newUser.UserType == "Premium")
-            {
-                if (decimal.Parse(money) > 100)
-                {
-                    var gif = decimal.Parse(money) * 2;
-                    newUser.Money = newUser.Money + gif;
-                }
+                    break;
+                case "SuperUser":
+                    if (newUser.Money > 100)
+                    {
+                        var percentage = Convert.ToDecimal(0.20);
+                        var gift = newUser.Money * percentage;
+                        newUser.Money = newUser.Money + gift;
+                    }
+                    break;
+                case "Premium":
+                    if (newUser.Money > 100)
+                    {
+                        var gift = newUser.Money * 2;
+                        newUser.Money = newUser.Money + gift;
+                    }
+                    break;
+                default:
+                    break;
             }
 
+            //if (newUser.UserType == "Normal")
+            //{
+            //    if (decimal.Parse(money) > 100)
+            //    {
+            //        var percentage = Convert.ToDecimal(0.12);
+            //        //If new user is normal and has more than USD100
+            //        var gif = decimal.Parse(money) * percentage;
+            //        newUser.Money = newUser.Money + gif;
+            //    }
+            //    if (decimal.Parse(money) < 100)
+            //    {
+            //        if (decimal.Parse(money) > 10)
+            //        {
+            //            var percentage = Convert.ToDecimal(0.8);
+            //            var gif = decimal.Parse(money) * percentage;
+            //            newUser.Money = newUser.Money + gif;
+            //        }
+            //    }
+            //}
+            //if (newUser.UserType == "SuperUser")
+            //{
+            //    if (decimal.Parse(money) > 100)
+            //    {
+            //        var percentage = Convert.ToDecimal(0.20);
+            //        var gif = decimal.Parse(money) * percentage;
+            //        newUser.Money = newUser.Money + gif;
+            //    }
+            //}
+            //if (newUser.UserType == "Premium")
+            //{
+            //    if (decimal.Parse(money) > 100)
+            //    {
+            //        var gif = decimal.Parse(money) * 2;
+            //        newUser.Money = newUser.Money + gif;
+            //    }
+            //}
 
+            ////Normalize email
+            //var aux = newUser.Email.Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
+
+            //var atIndex = aux[0].IndexOf("+", StringComparison.Ordinal);
+
+            //aux[0] = atIndex < 0 ? aux[0].Replace(".", "") : aux[0].Replace(".", "").Remove(atIndex);
+
+            //newUser.Email = string.Join("@", new string[] { aux[0], aux[1] });
+
+            //mover esto a una clase de repository con dependecy injection si es posible
             var reader = ReadUsersFromFile();
-
-            //Normalize email
-            var aux = newUser.Email.Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
-
-            var atIndex = aux[0].IndexOf("+", StringComparison.Ordinal);
-
-            aux[0] = atIndex < 0 ? aux[0].Replace(".", "") : aux[0].Replace(".", "").Remove(atIndex);
-
-            newUser.Email = string.Join("@", new string[] { aux[0], aux[1] });
 
             while (reader.Peek() >= 0)
             {
@@ -113,33 +150,35 @@ namespace Sat.Recruitment.Api.Controllers
                 _users.Add(user);
             }
             reader.Close();
+
+            Result result = null;
             try
             {
                 var isDuplicated = false;
                 foreach (var user in _users)
                 {
-                    if (user.Email == newUser.Email
-                        ||
-                        user.Phone == newUser.Phone)
+                    if ((user.Email == newUser.Email|| user.Phone == newUser.Phone) || 
+                        (user.Name == newUser.Name && user.Address == newUser.Address))
                     {
                         isDuplicated = true;
-                    }
-                    else if (user.Name == newUser.Name)
-                    {
-                        if (user.Address == newUser.Address)
-                        {
-                            isDuplicated = true;
-                            throw new Exception("User is duplicated");
-                        }
+                        throw new Exception("User is duplicated");
+                    //}
+                    //else if (user.Name == newUser.Name)
+                    //{
+                    //    if (user.Address == newUser.Address)
+                    //    {
+                    //        isDuplicated = true;
+                    //        throw new Exception("User is duplicated");
+                    //    }
 
-                    }
+                    //}
                 }
 
                 if (!isDuplicated)
                 {
                     Debug.WriteLine("User Created");
 
-                    return new Result()
+                    result = new Result()
                     {
                         IsSuccess = true,
                         Errors = "User Created"
@@ -149,7 +188,7 @@ namespace Sat.Recruitment.Api.Controllers
                 {
                     Debug.WriteLine("The user is duplicated");
 
-                    return new Result()
+                    result = new Result()
                     {
                         IsSuccess = false,
                         Errors = "The user is duplicated"
@@ -158,34 +197,29 @@ namespace Sat.Recruitment.Api.Controllers
             }
             catch
             {
-                Debug.WriteLine("The user is duplicated");
-                return new Result()
+                Debug.WriteLine("There was an error while creating the user");
+                result = new Result()
                 {
                     IsSuccess = false,
-                    Errors = "The user is duplicated"
+                    Errors = "There was an error while creating the user"
                 };
             }
-
-            return new Result()
-            {
-                IsSuccess = true,
-                Errors = "User Created"
-            };
+            return result;
         }
 
         //Validate errors
-        private void ValidateErrors(string name, string email, string address, string phone, ref string errors)
+        private void ValidateErrors(User newUser, ref string errors)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(newUser.Name))
                 //Validate if Name is null
                 errors = "The name is required";
-            if (email == null)
+            if (string.IsNullOrEmpty(newUser.Email))
                 //Validate if Email is null
                 errors = errors + " The email is required";
-            if (address == null)
+            if (string.IsNullOrEmpty(newUser.Address))
                 //Validate if Address is null
                 errors = errors + " The address is required";
-            if (phone == null)
+            if (string.IsNullOrEmpty(newUser.Phone))
                 //Validate if Phone is null
                 errors = errors + " The phone is required";
         }

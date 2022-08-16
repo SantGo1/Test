@@ -194,19 +194,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\San\\.nuget\\packages\\": {}
+    "C:\\Users\\cisterna\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Repos\\Examen Paramo\\Sat.Recruitment.Api\\Sat.Recruitment.Api.csproj",
+      "projectUniqueName": "C:\\Users\\cisterna\\Source\\Repos\\Test\\Sat.Recruitment.Api\\Sat.Recruitment.Api.csproj",
       "projectName": "Sat.Recruitment.Api",
-      "projectPath": "D:\\Repos\\Examen Paramo\\Sat.Recruitment.Api\\Sat.Recruitment.Api.csproj",
-      "packagesPath": "C:\\Users\\San\\.nuget\\packages\\",
-      "outputPath": "D:\\Repos\\Examen Paramo\\Sat.Recruitment.Api\\obj\\",
+      "projectPath": "C:\\Users\\cisterna\\Source\\Repos\\Test\\Sat.Recruitment.Api\\Sat.Recruitment.Api.csproj",
+      "packagesPath": "C:\\Users\\cisterna\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\cisterna\\Source\\Repos\\Test\\Sat.Recruitment.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\San\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\cisterna\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -259,7 +259,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

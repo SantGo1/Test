@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Repos\\Examen Paramo\\Sat.Recruitment.Test\\Sat.Recruitment.Test.csproj": {}
+    "C:\\Users\\cisterna\\Source\\Repos\\Test\\Sat.Recruitment.Test\\Sat.Recruitment.Test.csproj": {}
   },
   "projects": {
-    "D:\\Repos\\Examen Paramo\\Sat.Recruitment.Api\\Sat.Recruitment.Api.csproj": {
+    "C:\\Users\\cisterna\\Source\\Repos\\Test\\Sat.Recruitment.Api\\Sat.Recruitment.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Repos\\Examen Paramo\\Sat.Recruitment.Api\\Sat.Recruitment.Api.csproj",
+        "projectUniqueName": "C:\\Users\\cisterna\\Source\\Repos\\Test\\Sat.Recruitment.Api\\Sat.Recruitment.Api.csproj",
         "projectName": "Sat.Recruitment.Api",
-        "projectPath": "D:\\Repos\\Examen Paramo\\Sat.Recruitment.Api\\Sat.Recruitment.Api.csproj",
-        "packagesPath": "C:\\Users\\San\\.nuget\\packages\\",
-        "outputPath": "D:\\Repos\\Examen Paramo\\Sat.Recruitment.Api\\obj\\",
+        "projectPath": "C:\\Users\\cisterna\\Source\\Repos\\Test\\Sat.Recruitment.Api\\Sat.Recruitment.Api.csproj",
+        "packagesPath": "C:\\Users\\cisterna\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\cisterna\\Source\\Repos\\Test\\Sat.Recruitment.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\San\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\cisterna\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -67,21 +67,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Repos\\Examen Paramo\\Sat.Recruitment.Test\\Sat.Recruitment.Test.csproj": {
+    "C:\\Users\\cisterna\\Source\\Repos\\Test\\Sat.Recruitment.Test\\Sat.Recruitment.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Repos\\Examen Paramo\\Sat.Recruitment.Test\\Sat.Recruitment.Test.csproj",
+        "projectUniqueName": "C:\\Users\\cisterna\\Source\\Repos\\Test\\Sat.Recruitment.Test\\Sat.Recruitment.Test.csproj",
         "projectName": "Sat.Recruitment.Test",
-        "projectPath": "D:\\Repos\\Examen Paramo\\Sat.Recruitment.Test\\Sat.Recruitment.Test.csproj",
-        "packagesPath": "C:\\Users\\San\\.nuget\\packages\\",
-        "outputPath": "D:\\Repos\\Examen Paramo\\Sat.Recruitment.Test\\obj\\",
+        "projectPath": "C:\\Users\\cisterna\\Source\\Repos\\Test\\Sat.Recruitment.Test\\Sat.Recruitment.Test.csproj",
+        "packagesPath": "C:\\Users\\cisterna\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\cisterna\\Source\\Repos\\Test\\Sat.Recruitment.Test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\San\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\cisterna\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -95,8 +95,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\Repos\\Examen Paramo\\Sat.Recruitment.Api\\Sat.Recruitment.Api.csproj": {
-                "projectPath": "D:\\Repos\\Examen Paramo\\Sat.Recruitment.Api\\Sat.Recruitment.Api.csproj"
+              "C:\\Users\\cisterna\\Source\\Repos\\Test\\Sat.Recruitment.Api\\Sat.Recruitment.Api.csproj": {
+                "projectPath": "C:\\Users\\cisterna\\Source\\Repos\\Test\\Sat.Recruitment.Api\\Sat.Recruitment.Api.csproj"
               }
             }
           }
@@ -143,14 +143,11 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
